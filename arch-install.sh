@@ -48,11 +48,11 @@ then
 
 	locale-gen
 
-	echo "KEYMAP="$KEYMAP >> /etc/locale.gen
+	echo "KEYMAP="$KEYMAP > /etc/locale.gen
 
-	echo $HOSTNAME >> /etc/hostname
+	echo $HOSTNAME > /etc/hostname
 
-	echo "127.0.0.1\tlocalhost" >> /etc/hosts
+	echo "127.0.0.1\tlocalhost" > /etc/hosts
 	echo "::1" >> /etc/hosts
 
 	passwd
