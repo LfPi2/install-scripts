@@ -44,7 +44,7 @@ then
 
 	systemctl enable NetworkManager.service
 
-	echo "$(sed /etc/locale.gen -e "/s/#$LOCALE/$LOCALE")" > /etc/locale.gen
+	echo "$(sed /etc/locale.gen -e "s/\#$LOCALE/$LOCALE")" > /etc/locale.gen
 
 	locale-gen
 
@@ -71,7 +71,7 @@ then
 
 	pacman -S sudo
 
-	echo "$(sed /etc/sudoers -e "/s/# \%wheel ALL=(ALL:ALL) ALL/\%wheel ALL=(ALL:ALL) ALL")" > /etc/sudoers
+	echo "$(sed /etc/sudoers -e "s/\# \%wheel ALL=(ALL:ALL) ALL/\%wheel ALL=(ALL:ALL) ALL")" > /etc/sudoers
 
 	pacman -S xdg-user-dirs
 
