@@ -44,7 +44,7 @@ then
 
 	systemctl enable NetworkManager.service
 
-	echo "$(sed /etc/locale.gen -e "s/\#"$LOCALE"/"$LOCALE"/")" > /etc/locale.gen
+	echo "$(sed /etc/locale.gen -e "s/\#$LOCALE/$LOCALE/")" > /etc/locale.gen
 
 	locale-gen
 
@@ -52,7 +52,7 @@ then
 
 	echo $HOSTNAME > /etc/hostname
 
-	echo "127.0.0.1\tlocalhost" > /etc/hosts
+	echo -e "127.0.0.1\tlocalhost" > /etc/hosts
 	echo "::1" >> /etc/hosts
 
 	passwd
@@ -71,7 +71,10 @@ then
 
 	pacman -S sudo
 
-	echo "$(sed /etc/sudoers -e "s/\# \%wheel ALL=(ALL:ALL) ALL/\%wheel ALL=(ALL:ALL) ALL/")" > /etc/sudoers
+	cp /etc/sudoers /sudoers.temp
+
+	echo "$(sed /sudoers.temp -e "s/\# \%wheel ALL=(ALL:ALL) ALL/\%wheel ALL=(ALL:ALL) ALL/")" > /sudoers.temp
+	visudo -c /etc/sudoers.temp && cp /sudoers.temp /etc/sudoers
 
 	pacman -S xdg-user-dirs
 
