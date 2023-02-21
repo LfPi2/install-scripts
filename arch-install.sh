@@ -74,7 +74,7 @@ then
 	cp /etc/sudoers /sudoers.temp
 
 	echo "$(sed /sudoers.temp -e "s/\# \%wheel ALL=(ALL:ALL) ALL/\%wheel ALL=(ALL:ALL) ALL/")" > /sudoers.temp
-	visudo -c /etc/sudoers.temp && cp /sudoers.temp /etc/sudoers
+	visudo -c /sudoers.temp && cp /sudoers.temp /etc/sudoers
 
 	pacman -S xdg-user-dirs
 
