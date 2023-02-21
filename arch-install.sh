@@ -32,7 +32,8 @@ then
 	
 	genfstab -U /mnt >> /mnt/etc/fstab
 
-	arch-chroot /mnt ./arch-install.sh chroot
+	cp $0 /mnt/$0
+	arch-chroot /mnt /arch-install.sh chroot
 elif [ $1 -eq "chroot" ]
 then
 	ln -sf /usr/share/$REGION/$CITY /etc/localtime
