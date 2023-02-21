@@ -34,7 +34,7 @@ then
 
 	cp $0 /mnt/$0
 	arch-chroot /mnt /arch-install.sh chroot
-elif [ $1 -eq "chroot" ]
+elif [ "$1" = "chroot" ]
 then
 	ln -sf /usr/share/$REGION/$CITY /etc/localtime
 
