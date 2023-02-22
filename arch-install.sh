@@ -79,7 +79,7 @@ then
 	echo "$(sed /sudoers.temp -e "s/\# \%wheel ALL=(ALL:ALL) ALL/\%wheel ALL=(ALL:ALL) ALL/")" > /sudoers.temp
 	visudo -c /sudoers.temp && cp /sudoers.temp /etc/sudoers
 
-	pacman -S --noconfirm xdg-user-dirs git base-devel xorg xorg-xinit pulseaudio pulseaudio-alsa
+	pacman -S --noconfirm xdg-user-dirs git base-devel xorg xorg-xinit pulseaudio pulseaudio-alsa firefox kitty
 
 	cp $0 /home/$USERNAME/$0
 
