@@ -43,7 +43,7 @@ then
 
 	hwclock --systohc
 
-	pacman -S networkmanager man-db man-pages texinfo neovim
+	pacman -S --noconfirm networkmanager man-db man-pages texinfo neovim
 
 	systemctl enable NetworkManager.service
 
@@ -60,7 +60,7 @@ then
 
 	passwd
 
-	pacman -S grub efibootmgr
+	pacman -S --noconfirm grub efibootmgr
 
 	grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 
@@ -72,14 +72,23 @@ then
 
 	usermod -aG wheel $USERNAME
 
-	pacman -S sudo
+	pacman -S --noconfirm sudo
 
 	cp /etc/sudoers /sudoers.temp
 
 	echo "$(sed /sudoers.temp -e "s/\# \%wheel ALL=(ALL:ALL) ALL/\%wheel ALL=(ALL:ALL) ALL/")" > /sudoers.temp
 	visudo -c /sudoers.temp && cp /sudoers.temp /etc/sudoers
 
-	pacman -S xdg-user-dirs
+	pacman -S --noconfirm xdg-user-dirs
 
-	sudo -u $USERNAME xdg-user-dirs-update
+	cp $0 /home/$USERNAME/$0
+
+	sudo -u $USERNAME $HOME/$0 user
+elif [ "$1" = "user" ]
+then
+	cd $HOME
+
+	xdg-user-dirs-update
+
+	mkdir repos code
 fi
