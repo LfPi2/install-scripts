@@ -79,7 +79,7 @@ then
 	echo "$(sed /sudoers.temp -e "s/\# \%wheel ALL=(ALL:ALL) ALL/\%wheel ALL=(ALL:ALL) ALL/")" > /sudoers.temp
 	visudo -c /sudoers.temp && cp /sudoers.temp /etc/sudoers
 
-	pacman -S --noconfirm xdg-user-dirs
+	pacman -S --noconfirm xdg-user-dirs git base-devel xorg xorg-xinit pulseaudio pulseaudio-alsa
 
 	cp $0 /home/$USERNAME/$0
 
@@ -91,4 +91,19 @@ then
 	xdg-user-dirs-update
 
 	mkdir repos code
+
+	cd repos
+
+	git clone git://git.suckless.org/dwm
+	git clone git://git.suckless.org/dmenu
+
+	cd dwm
+
+	make
+	sudo make clean install
+
+	cd ../dmenu
+
+	make
+	sudo make clean install
 fi
