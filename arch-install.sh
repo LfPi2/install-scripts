@@ -1,16 +1,19 @@
 #!/bin/sh
 
 KEYMAP="pt-latin1"
-# Example: /dev/sda
-DISK=""
+
 # Example: /dev/sda1
 EFI_PARTITION=""
 FORMAT_EFI_PARTITION=0
+
 # Example: /dev/sda2
 ROOT_PARTITION=""
+
 REGION="Europe"
 CITY="Lisbon"
+
 LOCALE="en_US.UTF-8 UTF-8"
+
 HOSTNAME=""
 USERNAME=""
 
@@ -48,7 +51,7 @@ then
 
 	locale-gen
 
-	echo "KEYMAP="$KEYMAP > /etc/locale.gen
+	echo "KEYMAP=$KEYMAP" > /etc/vconsole.conf
 
 	echo $HOSTNAME > /etc/hostname
 
