@@ -17,6 +17,12 @@ LOCALE="en_US.UTF-8 UTF-8"
 HOSTNAME=""
 USERNAME=""
 
+FIRMWARE_PACKAGES="alsa-firmware sof-firmware alsa-ucm-conf"
+BASE_PACKAGES="networkmanager man-db man-pages neovim grub efibootmgr sudo xdg-user-dirs git base-devel xorg xorg-xinit pulseaudio pulseaudio-alsa pavucontrol kitty"
+FONT_PACKAGES="adobe-source-han-sans-otc-fonts"
+UTILITY_PACKAGES="htop alsa-utils"
+EXTRA_PACKAGES="firefox"
+
 if [ -z $1 ]
 then
 	loadkeys $KEYMAP
@@ -43,7 +49,30 @@ then
 
 	hwclock --systohc
 
-	pacman -S --noconfirm networkmanager man-db man-pages texinfo neovim
+	if [ -n "$FIRMWARE_PACKAGES" ]
+	then
+		pacman -S --noconfirm $FIRMWARE_PACKAGES
+	fi
+
+	if [ -n "$BASE_PACKAGES" ]
+	then
+		pacman -S --noconfirm $BASE_PACKAGES
+	fi
+
+	if [ -n "$FONT_PACKAGES" ]
+	then
+		pacman -S --noconfirm $FONT_PACKAGES
+	fi
+
+	if [ -n "$UTILITY_PACKAGES" ]
+	then
+		pacman -S --noconfirm $UTILITY_PACKAGES
+	fi
+
+	if [ -n "$EXTRA_PACKAGES" ]
+	then
+		pacman -S --noconfirm $EXTRA_PACKAGES
+	fi
 
 	systemctl enable NetworkManager.service
 
@@ -60,8 +89,6 @@ then
 
 	passwd
 
-	pacman -S --noconfirm grub efibootmgr
-
 	grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 
 	grub-mkconfig -o /boot/grub/grub.cfg
@@ -72,14 +99,10 @@ then
 
 	usermod -aG wheel $USERNAME
 
-	pacman -S --noconfirm sudo
-
 	cp /etc/sudoers /sudoers.temp
 
 	echo "$(sed /sudoers.temp -e "s/\# \%wheel ALL=(ALL:ALL) ALL/\%wheel ALL=(ALL:ALL) ALL/")" > /sudoers.temp
 	visudo -c /sudoers.temp && cp /sudoers.temp /etc/sudoers
-
-	pacman -S --noconfirm xdg-user-dirs git base-devel xorg xorg-xinit pulseaudio pulseaudio-alsa firefox kitty
 
 	cp $0 /home/$USERNAME/$0
 
