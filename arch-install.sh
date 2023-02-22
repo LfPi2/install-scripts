@@ -83,7 +83,7 @@ then
 
 	cp $0 /home/$USERNAME/$0
 
-	sudo -u $USERNAME $HOME/$0 user
+	sudo -u $USERNAME /home/$USERNAME/$0 user
 elif [ "$1" = "user" ]
 then
 	cd $HOME
