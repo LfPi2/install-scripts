@@ -107,6 +107,8 @@ then
 	cp $0 /home/$USERNAME/$0
 
 	sudo -u $USERNAME /home/$USERNAME/$0 user
+
+	rm /arch-install.sh /home/$USERNAME/arch-install.sh
 elif [ "$1" = "user" ]
 then
 	cd $HOME
@@ -119,6 +121,7 @@ then
 
 	git clone git://git.suckless.org/dwm
 	git clone git://git.suckless.org/dmenu
+	git clone --separate-git-dir=$HOME/.dotfiles https://github.com/LfPi2/dotfiles
 
 	cd dwm
 
@@ -129,4 +132,10 @@ then
 
 	make
 	sudo make clean install
+
+	cd ../dotfiles
+
+	rm .git
+
+	cp -r ./ $HOME
 fi
