@@ -18,7 +18,7 @@ HOSTNAME=""
 USERNAME=""
 
 FIRMWARE_PACKAGES="alsa-firmware sof-firmware alsa-ucm-conf"
-BASE_PACKAGES="networkmanager man-db man-pages neovim grub efibootmgr sudo xdg-user-dirs git base-devel xorg xorg-xinit pulseaudio pulseaudio-alsa pavucontrol kitty picom feh"
+BASE_PACKAGES="networkmanager man-db man-pages neovim grub efibootmgr sudo xdg-user-dirs git base-devel xorg xorg-xinit pulseaudio pulseaudio-alsa pavucontrol kitty picom feh zip unzip"
 FONT_PACKAGES="adobe-source-han-sans-otc-fonts"
 UTILITY_PACKAGES="htop alsa-utils"
 EXTRA_PACKAGES="firefox"
