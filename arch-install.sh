@@ -17,6 +17,8 @@ LOCALE="en_US.UTF-8 UTF-8"
 HOSTNAME=""
 USERNAME=""
 
+# Microcode for AMD processors amd-ucode
+# Microcode for Intel processors intel-ucode
 FIRMWARE_PACKAGES="alsa-firmware sof-firmware alsa-ucm-conf"
 BASE_PACKAGES="networkmanager man-db man-pages neovim grub efibootmgr sudo xdg-user-dirs git base-devel xorg xorg-xinit pulseaudio pulseaudio-alsa pavucontrol kitty picom feh zip unzip openssh"
 FONT_PACKAGES="adobe-source-han-sans-otc-fonts"
@@ -119,7 +121,7 @@ then
 
 	cd repos
 
-	git clone git://git.suckless.org/dwm
+	git clone https://github.com/LfPi2/dwm
 	git clone git://git.suckless.org/dmenu
 	git clone --separate-git-dir=$HOME/.dotfiles https://github.com/LfPi2/dotfiles
 
