@@ -19,6 +19,7 @@ USERNAME=""
 
 # Microcode for AMD processors amd-ucode
 # Microcode for Intel processors intel-ucode
+MICROCODE=""
 FIRMWARE_PACKAGES="alsa-firmware sof-firmware alsa-ucm-conf"
 BASE_PACKAGES="networkmanager man-db man-pages neovim grub efibootmgr sudo xdg-user-dirs git base-devel xorg xorg-xinit pulseaudio pulseaudio-alsa pavucontrol kitty picom feh zip unzip openssh"
 FONT_PACKAGES="adobe-source-han-sans-otc-fonts"
@@ -50,6 +51,11 @@ then
 	ln -sf /usr/share/$REGION/$CITY /etc/localtime
 
 	hwclock --systohc
+
+	if [ -n "$MICROCODE" ]
+	then
+		pacman -S $MICROCODE
+	fi
 
 	if [ -n "$FIRMWARE_PACKAGES" ]
 	then
